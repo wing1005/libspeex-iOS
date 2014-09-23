@@ -44,7 +44,7 @@ available_tags=" CXX"
 
 # ### BEGIN LIBTOOL CONFIG
 
-# Libtool was configured on host Ryan-MacBook.local:
+# Libtool was configured on host EvanMac.local:
 
 # Shell to use when invoking shell scripts.
 SHELL="/bin/sh"
@@ -65,8 +65,8 @@ allow_libtool_libs_with_static_runtimes=no
 fast_install=needless
 
 # The host system.
-host_alias=armv7-apple-darwin11
-host=armv7-apple-darwin11
+host_alias=aarch64-apple-darwin11
+host=aarch64-apple-darwin11
 host_os=darwin11
 
 # The build system.
@@ -85,7 +85,7 @@ AR_FLAGS="cru"
 LTCC="clang"
 
 # LTCC compiler flags.
-LTCFLAGS="-arch armv7 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.1.sdk"
+LTCFLAGS="-arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.0.sdk -miphoneos-version-min=6.0"
 
 # A language-specific compiler.
 CC="clang"
@@ -326,7 +326,7 @@ variables_saved_for_relink="PATH DYLD_LIBRARY_PATH  GCC_EXEC_PREFIX COMPILER_PAT
 link_all_deplibs=yes
 
 # Compile-time system search path for libraries
-sys_lib_search_path_spec="/usr/lib/clang/3.1 /usr/local/lib"
+sys_lib_search_path_spec="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/6.0 /usr/local/lib"
 
 # Run-time system search path for libraries
 sys_lib_dlsearch_path_spec="/usr/local/lib /lib /usr/lib"
@@ -7224,7 +7224,7 @@ disable_libs=static
 # End:
 # ### BEGIN LIBTOOL TAG CONFIG: CXX
 
-# Libtool was configured on host Ryan-MacBook.local:
+# Libtool was configured on host EvanMac.local:
 
 # Shell to use when invoking shell scripts.
 SHELL="/bin/sh"
@@ -7245,8 +7245,8 @@ allow_libtool_libs_with_static_runtimes=no
 fast_install=needless
 
 # The host system.
-host_alias=armv7-apple-darwin11
-host=armv7-apple-darwin11
+host_alias=aarch64-apple-darwin11
+host=aarch64-apple-darwin11
 host_os=darwin11
 
 # The build system.
@@ -7265,13 +7265,13 @@ AR_FLAGS="cru"
 LTCC="clang"
 
 # LTCC compiler flags.
-LTCFLAGS="-arch armv7 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.1.sdk"
+LTCFLAGS="-arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.0.sdk -miphoneos-version-min=6.0"
 
 # A language-specific compiler.
 CC="g++"
 
 # Is the compiler the GNU C compiler?
-with_gcc=no
+with_gcc=yes
 
 # An ERE matcher.
 EGREP="/usr/bin/grep -E"
@@ -7308,7 +7308,7 @@ reload_flag=" -r"
 reload_cmds="\$LTCC \$LTCFLAGS -nostdlib \${wl}-r -o \$output\$reload_objs"
 
 # How to pass a linker flag through the compiler.
-wl=""
+wl="-Wl,"
 
 # Object file suffix (normally "o").
 objext="o"
@@ -7323,14 +7323,14 @@ shrext_cmds='`test .$module = .yes && echo .so || echo .dylib`'
 exeext=""
 
 # Additional compiler flags for building library objects.
-pic_flag=" -DPIC"
+pic_flag=" -fno-common -DPIC"
 pic_mode=default
 
 # What is the maximum length of a command?
 max_cmd_len=196608
 
 # Does compiler simultaneously support -c and -o options?
-compiler_c_o="no"
+compiler_c_o="yes"
 
 # Must we lock files when doing compilation?
 need_locks="no"
@@ -7354,7 +7354,7 @@ dlopen_self_static=unknown
 link_static_flag=""
 
 # Compiler flag to turn off builtin functions.
-no_builtin_flag=""
+no_builtin_flag=" -fno-builtin"
 
 # Compiler flag to allow reflexive dlopens.
 export_dynamic_flag_spec=""
@@ -7391,14 +7391,14 @@ old_archive_from_new_cmds=""
 old_archive_from_expsyms_cmds=""
 
 # Commands used to build and install a shared archive.
-archive_cmds=""
-archive_expsym_cmds=""
+archive_cmds="\$CC -dynamiclib \$allow_undefined_flag -o \$lib \$libobjs \$deplibs \$compiler_flags -install_name \$rpath/\$soname \$verstring \$single_module~dsymutil \$lib || :"
+archive_expsym_cmds="sed 's,^,_,' < \$export_symbols > \$output_objdir/\${libname}-symbols.expsym~\$CC -dynamiclib \$allow_undefined_flag -o \$lib \$libobjs \$deplibs \$compiler_flags -install_name \$rpath/\$soname \$verstring \$single_module \${wl}-exported_symbols_list,\$output_objdir/\${libname}-symbols.expsym~dsymutil \$lib || :"
 postinstall_cmds=""
 postuninstall_cmds=""
 
 # Commands used to build a loadable module (assumed same as above if empty)
-module_cmds=""
-module_expsym_cmds=""
+module_cmds="\$CC \$allow_undefined_flag -o \$lib -bundle \$libobjs \$deplibs \$compiler_flags~dsymutil \$lib || :"
+module_expsym_cmds="sed -e 's,^,_,' < \$export_symbols > \$output_objdir/\${libname}-symbols.expsym~\$CC \$allow_undefined_flag -o \$lib -bundle \$libobjs \$deplibs \$compiler_flags \${wl}-exported_symbols_list,\$output_objdir/\${libname}-symbols.expsym~dsymutil \$lib || :"
 
 # Commands to strip libraries.
 old_striplib="strip -S"
@@ -7500,13 +7500,13 @@ hardcode_automatic=yes
 
 # Variables whose values should be saved in libtool wrapper scripts and
 # restored at relink time.
-variables_saved_for_relink="PATH DYLD_LIBRARY_PATH "
+variables_saved_for_relink="PATH DYLD_LIBRARY_PATH  GCC_EXEC_PREFIX COMPILER_PATH LIBRARY_PATH"
 
 # Whether libtool must link a program against all its dependency libraries.
 link_all_deplibs=yes
 
 # Compile-time system search path for libraries
-sys_lib_search_path_spec="/usr/lib/clang/3.1 /usr/local/lib"
+sys_lib_search_path_spec="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/6.0 /usr/local/lib"
 
 # Run-time system search path for libraries
 sys_lib_dlsearch_path_spec="/usr/local/lib /lib /usr/lib"
