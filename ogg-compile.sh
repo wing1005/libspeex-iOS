@@ -7,7 +7,7 @@ SDKVERSION="8.0"
 LIB="libogg"
 
 DEVELOPER=`xcode-select -print-path`
-ARCHS="i386 x86_64 armv7 arm64"
+ARCHS="i386 x86_64 armv7 armv7s arm64"
 CURRENTPATH=`pwd`
 BUILD="x86_64-apple-darwin11"
 OLD_PATH=$PATH
@@ -61,7 +61,7 @@ cp -r ${CURRENTPATH}/build/${LIB}/i386/ ${CURRENTPATH}/build/${LIB}/Fat
 rm -rf ${CURRENTPATH}/build/${LIB}/Fat/lib/*
 
 echo "Build library..."
-lipo -create ${CURRENTPATH}/build/${LIB}/i386/lib/${LIB}.a ${CURRENTPATH}/build/${LIB}/x86_64/lib/${LIB}.a ${CURRENTPATH}/build/${LIB}/arm64/lib/${LIB}.a ${CURRENTPATH}/build/${LIB}/armv7/lib/${LIB}.a -output ${CURRENTPATH}/build/${LIB}/Fat/lib/${LIB}.a
+lipo -create ${CURRENTPATH}/build/${LIB}/i386/lib/${LIB}.a ${CURRENTPATH}/build/${LIB}/x86_64/lib/${LIB}.a ${CURRENTPATH}/build/${LIB}/arm64/lib/${LIB}.a ${CURRENTPATH}/build/${LIB}/armv7/lib/${LIB}.a ${CURRENTPATH}/build/${LIB}/armv7s/lib/${LIB}.a -output ${CURRENTPATH}/build/${LIB}/Fat/lib/${LIB}.a
 
 echo "======== CHECK FAT ARCH ========"
 lipo -info ${CURRENTPATH}/build/${LIB}/Fat/lib/${LIB}.a

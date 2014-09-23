@@ -5,7 +5,7 @@ SDKVERSION="8.0"
 LIB="speex"
 
 DEVELOPER=`xcode-select -print-path`
-ARCHS="i386 x86_64 armv7 arm64"
+ARCHS="i386 x86_64 armv7 armv7s arm64"
 CURRENTPATH=`pwd`
 BUILD="x86_64-apple-darwin11"
 OLD_PATH=$PATH
@@ -60,10 +60,10 @@ cp -r ${CURRENTPATH}/build/${LIB}/i386/ ${CURRENTPATH}/build/${LIB}/Fat
 rm -rf ${CURRENTPATH}/build/${LIB}/Fat/lib/*
 
 echo "Build library - libspeex.a"
-lipo -create ${CURRENTPATH}/build/${LIB}/i386/lib/lib${LIB}.a ${CURRENTPATH}/build/${LIB}/x86_64/lib/lib${LIB}.a ${CURRENTPATH}/build/${LIB}/arm64/lib/lib${LIB}.a ${CURRENTPATH}/build/${LIB}/armv7/lib/lib${LIB}.a -output ${CURRENTPATH}/build/${LIB}/Fat/lib/lib${LIB}.a
+lipo -create ${CURRENTPATH}/build/${LIB}/i386/lib/lib${LIB}.a ${CURRENTPATH}/build/${LIB}/x86_64/lib/lib${LIB}.a ${CURRENTPATH}/build/${LIB}/arm64/lib/lib${LIB}.a ${CURRENTPATH}/build/${LIB}/armv7/lib/lib${LIB}.a ${CURRENTPATH}/build/${LIB}/armv7s/lib/lib${LIB}.a -output ${CURRENTPATH}/build/${LIB}/Fat/lib/lib${LIB}.a
 
 echo "Build library - libspeexdsp.a"
-lipo -create ${CURRENTPATH}/build/${LIB}/i386/lib/lib${LIB}dsp.a ${CURRENTPATH}/build/${LIB}/x86_64/lib/lib${LIB}dsp.a ${CURRENTPATH}/build/${LIB}/arm64/lib/lib${LIB}dsp.a ${CURRENTPATH}/build/${LIB}/armv7/lib/lib${LIB}dsp.a -output ${CURRENTPATH}/build/${LIB}/Fat/lib/lib${LIB}dsp.a
+lipo -create ${CURRENTPATH}/build/${LIB}/i386/lib/lib${LIB}dsp.a ${CURRENTPATH}/build/${LIB}/x86_64/lib/lib${LIB}dsp.a ${CURRENTPATH}/build/${LIB}/arm64/lib/lib${LIB}dsp.a ${CURRENTPATH}/build/${LIB}/armv7/lib/lib${LIB}dsp.a ${CURRENTPATH}/build/${LIB}/armv7s/lib/lib${LIB}dsp.a -output ${CURRENTPATH}/build/${LIB}/Fat/lib/lib${LIB}dsp.a
 
 
 echo "======== CHECK FAT ARCH ========"
