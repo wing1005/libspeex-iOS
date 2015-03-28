@@ -1,7 +1,7 @@
 #!/bin/sh
 
-VERSION="1.2rc1"
-SDKVERSION="8.0"
+VERSION="1.2rc2"
+SDKVERSION="8.2"
 LIB="speex"
 
 DEVELOPER=`xcode-select -print-path`
@@ -63,12 +63,12 @@ echo "Build library - libspeex.a"
 lipo -create ${CURRENTPATH}/build/${LIB}/i386/lib/lib${LIB}.a ${CURRENTPATH}/build/${LIB}/x86_64/lib/lib${LIB}.a ${CURRENTPATH}/build/${LIB}/arm64/lib/lib${LIB}.a ${CURRENTPATH}/build/${LIB}/armv7/lib/lib${LIB}.a ${CURRENTPATH}/build/${LIB}/armv7s/lib/lib${LIB}.a -output ${CURRENTPATH}/build/${LIB}/Fat/lib/lib${LIB}.a
 
 echo "Build library - libspeexdsp.a"
-lipo -create ${CURRENTPATH}/build/${LIB}/i386/lib/lib${LIB}dsp.a ${CURRENTPATH}/build/${LIB}/x86_64/lib/lib${LIB}dsp.a ${CURRENTPATH}/build/${LIB}/arm64/lib/lib${LIB}dsp.a ${CURRENTPATH}/build/${LIB}/armv7/lib/lib${LIB}dsp.a ${CURRENTPATH}/build/${LIB}/armv7s/lib/lib${LIB}dsp.a -output ${CURRENTPATH}/build/${LIB}/Fat/lib/lib${LIB}dsp.a
+#lipo -create ${CURRENTPATH}/build/${LIB}/i386/lib/lib${LIB}dsp.a ${CURRENTPATH}/build/${LIB}/x86_64/lib/lib${LIB}dsp.a ${CURRENTPATH}/build/${LIB}/arm64/lib/lib${LIB}dsp.a ${CURRENTPATH}/build/${LIB}/armv7/lib/lib${LIB}dsp.a ${CURRENTPATH}/build/${LIB}/armv7s/lib/lib${LIB}dsp.a -output ${CURRENTPATH}/build/${LIB}/Fat/lib/lib${LIB}dsp.a
 
 
 echo "======== CHECK FAT ARCH ========"
 lipo -info ${CURRENTPATH}/build/${LIB}/Fat/lib/lib${LIB}.a
-lipo -info ${CURRENTPATH}/build/${LIB}/Fat/lib/lib${LIB}dsp.a
+#lipo -info ${CURRENTPATH}/build/${LIB}/Fat/lib/lib${LIB}dsp.a
 echo "======== CHECK DONE ========"
 
 echo "== Done =="
