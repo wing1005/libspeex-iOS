@@ -1,8 +1,8 @@
 #!/bin/sh
 
-VERSION="1.2rc2"
+VERSION="1.2rc3"
 SDKVERSION="8.2"
-LIB="speex"
+LIB="speexdsp"
 
 DEVELOPER=`xcode-select -print-path`
 ARCHS="i386 x86_64 armv7 armv7s arm64"
@@ -22,6 +22,7 @@ do
         "arm64")
             PLATFORM="iPhoneOS"
             HOST="aarch64-apple-darwin11"
+            EXTRA="--disable-neon"
             ;;
         *)
             PLATFORM="iPhoneOS"
@@ -44,7 +45,7 @@ do
 
     echo "Please stand by..."
 
-    ./configure --prefix=$PREFIX --host=${HOST} -build=${BUILD} --with-ogg-libraries=${CURRENTPATH}/build/libogg/Fat/lib/ -with-ogg-includes=${CURRENTPATH}/build/libogg/Fat/include
+    ./configure --prefix=$PREFIX --host=${HOST} -build=${BUILD} --with-ogg-libraries=${CURRENTPATH}/build/libogg/Fat/lib/ -with-ogg-includes=${CURRENTPATH}/build/libogg/Fat/include ${EXTRA}
     make clean
     make && make install
 
@@ -59,16 +60,11 @@ echo " == Copy headers to fat folder from i386 folder AND clean files in lib =="
 cp -r ${CURRENTPATH}/build/${LIB}/i386/ ${CURRENTPATH}/build/${LIB}/Fat
 rm -rf ${CURRENTPATH}/build/${LIB}/Fat/lib/*
 
-echo "Build library - libspeex.a"
+echo "Build library - libspeexdsp.a"
 lipo -create ${CURRENTPATH}/build/${LIB}/i386/lib/lib${LIB}.a ${CURRENTPATH}/build/${LIB}/x86_64/lib/lib${LIB}.a ${CURRENTPATH}/build/${LIB}/arm64/lib/lib${LIB}.a ${CURRENTPATH}/build/${LIB}/armv7/lib/lib${LIB}.a ${CURRENTPATH}/build/${LIB}/armv7s/lib/lib${LIB}.a -output ${CURRENTPATH}/build/${LIB}/Fat/lib/lib${LIB}.a
-
-#echo "Build library - libspeexdsp.a"
-#lipo -create ${CURRENTPATH}/build/${LIB}/i386/lib/lib${LIB}dsp.a ${CURRENTPATH}/build/${LIB}/x86_64/lib/lib${LIB}dsp.a ${CURRENTPATH}/build/${LIB}/arm64/lib/lib${LIB}dsp.a ${CURRENTPATH}/build/${LIB}/armv7/lib/lib${LIB}dsp.a ${CURRENTPATH}/build/${LIB}/armv7s/lib/lib${LIB}dsp.a -output ${CURRENTPATH}/build/${LIB}/Fat/lib/lib${LIB}dsp.a
-
 
 echo "======== CHECK FAT ARCH ========"
 lipo -info ${CURRENTPATH}/build/${LIB}/Fat/lib/lib${LIB}.a
-#lipo -info ${CURRENTPATH}/build/${LIB}/Fat/lib/lib${LIB}dsp.a
 echo "======== CHECK DONE ========"
 
 echo "== Done =="
