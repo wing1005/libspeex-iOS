@@ -3,7 +3,7 @@
 #source ./env.shi
 
 VERSION="1.3.2"
-SDKVERSION="8.2"
+SDKVERSION="8.3"
 LIB="libogg"
 
 DEVELOPER=`xcode-select -print-path`

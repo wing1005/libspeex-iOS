@@ -8,3 +8,9 @@ Compile Fat lib with i386, x86_64, armv7, armv7s and arm64.
 
 Before running the script, make sure you set below:
 export PATH=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:$PATH
+
+Build order:
+
+1. ./ogg-compile.sh
+2. ./speexdsp-compile.sh
+3. ./speex-compile.sh

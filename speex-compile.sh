@@ -1,7 +1,7 @@
 #!/bin/sh
 
 VERSION="1.2rc2"
-SDKVERSION="8.2"
+SDKVERSION="8.3"
 LIB="speex"
 
 DEVELOPER=`xcode-select -print-path`
@@ -10,10 +10,14 @@ CURRENTPATH=`pwd`
 BUILD="x86_64-apple-darwin11"
 OLD_PATH=$PATH
 
+rm -fR build/speex
+
 cd ${LIB}-${VERSION}
 
 for ARCH in ${ARCHS}
 do
+    rm -f Makefile
+
     case "${ARCH}" in
         "i386"|"x86_64")
             PLATFORM="iPhoneSimulator"
@@ -37,6 +41,10 @@ do
     export CXXFLAGS="$CFLAGS"
     export LDFLAGS="$CFLAGS"
     export LD=$CC
+    export OGG_CFLAGS="-I${CURRENTPATH}/build/libogg/Fat/include"
+    export OGG_LIBS="${CURRENTPATH}/build/libogg/Fat/lib/libogg.a"
+    export SPEEXDSP_CFLAGS="-I${CURRENTPATH}/build/speexdsp/Fat/include"
+    export SPEEXDSP_LIBS="${CURRENTPATH}/build/speexdsp/Fat/lib/libspeexdsp.a"
 
     PREFIX="${CURRENTPATH}/build/${LIB}/${ARCH}"
 
@@ -44,7 +52,7 @@ do
 
     echo "Please stand by..."
 
-    ./configure --prefix=$PREFIX --host=${HOST} -build=${BUILD} --with-ogg-libraries=${CURRENTPATH}/build/libogg/Fat/lib/ -with-ogg-includes=${CURRENTPATH}/build/libogg/Fat/include
+    ./configure --prefix=$PREFIX --host=${HOST} -build=${BUILD}
     make clean
     make && make install
 

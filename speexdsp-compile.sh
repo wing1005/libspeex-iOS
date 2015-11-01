@@ -1,7 +1,7 @@
 #!/bin/sh
 
 VERSION="1.2rc3"
-SDKVERSION="8.2"
+SDKVERSION="8.3"
 LIB="speexdsp"
 
 DEVELOPER=`xcode-select -print-path`
